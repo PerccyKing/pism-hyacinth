@@ -1,4 +1,6 @@
-package cn.com.pism.hyacinth.commons.model;
+package cn.com.pism.hyacinth.commons.module;
+
+import cn.com.pism.hyacinth.commons.module.enums.HcModuleItf;
 
 /**
  * @author PerccyKing
@@ -17,5 +19,5 @@ public interface HcModule {
      * @return {@link String} 模块名称
      * @since 2023/3/4 18:39
      */
-    String getModuleName();
+    HcModuleItf getModuleName();
 }

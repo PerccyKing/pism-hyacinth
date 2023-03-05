@@ -1,6 +1,7 @@
 package cn.com.pism.hyacinth.annotation;
 
-import cn.com.pism.hyacinth.commons.model.HcModule;
+import cn.com.pism.hyacinth.commons.module.HcModule;
+import cn.com.pism.hyacinth.commons.module.enums.HcModuleEnums;
 
 /**
  * @author PerccyKing
@@ -8,7 +9,7 @@ import cn.com.pism.hyacinth.commons.model.HcModule;
  */
 public class HcAnnotationModule implements HcModule {
     @Override
-    public String getModuleName() {
-        return "HC-ANNOTATION";
+    public HcModuleEnums getModuleName() {
+        return HcModuleEnums.HC_ANNOTATION;
     }
 }

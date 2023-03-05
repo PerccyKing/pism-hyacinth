@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>pism-hyacinth-commons-object</artifactId>
+    <artifactId>pism-hyacinth-commons-enums</artifactId>
 
     <properties>
         <java.version>17</java.version>

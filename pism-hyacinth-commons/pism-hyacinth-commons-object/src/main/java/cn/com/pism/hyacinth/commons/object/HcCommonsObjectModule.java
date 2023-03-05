@@ -1,6 +1,9 @@
 package cn.com.pism.hyacinth.commons.object;
 
-import cn.com.pism.hyacinth.commons.model.HcModule;
+import cn.com.pism.hyacinth.commons.module.HcModule;
+import cn.com.pism.hyacinth.commons.module.enums.HcModuleEnums;
+
+import static cn.com.pism.hyacinth.commons.module.enums.HcModuleEnums.HC_COMMONS_OBJECT;
 
 /**
  * @author PerccyKing
@@ -8,7 +11,7 @@ import cn.com.pism.hyacinth.commons.model.HcModule;
  */
 public class HcCommonsObjectModule implements HcModule {
     @Override
-    public String getModuleName() {
-        return " HC-COMMONS-OBJECT";
+    public HcModuleEnums getModuleName() {
+        return HC_COMMONS_OBJECT;
     }
 }

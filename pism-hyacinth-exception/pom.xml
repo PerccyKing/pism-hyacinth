@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.com.pism</groupId>
-        <artifactId>pism-hyacinth-commons</artifactId>
+        <artifactId>pism-hyacinth</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>pism-hyacinth-commons-object</artifactId>
+    <artifactId>pism-hyacinth-exception</artifactId>
 
     <properties>
         <java.version>17</java.version>
@@ -17,12 +17,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>cn.com.pism</groupId>
-            <artifactId>pism-hyacinth-commons-module</artifactId>
-        </dependency>
-    </dependencies>
 
 </project>

@@ -17,12 +17,56 @@
         <module>pism-hyacinth-commons-module</module>
         <module>pism-hyacinth-commons-util</module>
         <module>pism-hyacinth-commons-object</module>
+        <module>pism-hyacinth-commons-enums</module>
+        <module>pism-hyacinth-commons-esm</module>
     </modules>
 
     <properties>
+        <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>cn.com.pism</groupId>
+                <artifactId>pism-hyacinth-commons-module</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.pism</groupId>
+                <artifactId>pism-hyacinth-commons-util</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.pism</groupId>
+                <artifactId>pism-hyacinth-commons-object</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.pism</groupId>
+                <artifactId>pism-hyacinth-commons-enums</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.com.pism</groupId>
+                <artifactId>pism-hyacinth-commons-esm</artifactId>
+                <version>${revision}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
