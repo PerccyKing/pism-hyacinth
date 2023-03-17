@@ -12,4 +12,6 @@ public class HcSystemConstant {
 
     public static final String HC_MYBATIS_SQL_SCRIPT = "<script>\n %s \n</script>";
 
+    public static final String OK = "OK";
+
 }

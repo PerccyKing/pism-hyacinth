@@ -8,7 +8,7 @@ import org.springframework.core.io.ResourceLoader;
 
 import java.io.IOException;
 
-import static cn.com.pism.hyacinth.commons.util.FreeMarkerUtil.createConfiguration;
+import static cn.com.pism.hyacinth.commons.util.HcFreeMarkerUtil.createConfiguration;
 
 
 /**
@@ -20,8 +20,8 @@ public class HcFreemarkerConfig {
 
     private final ResourceLoader resourceLoader = new DefaultResourceLoader();
 
-    @Bean
-    public freemarker.template.Configuration freeMarkerConfiguration() throws IOException {
+    @Bean("hcFreeMarkerConfiguration")
+    public freemarker.template.Configuration hcFreeMarkerConfiguration() throws IOException {
         freemarker.template.Configuration configuration = createConfiguration();
         Resource resource = resourceLoader.getResource("classpath:/templates");
         configuration.setDirectoryForTemplateLoading(resource.getFile());

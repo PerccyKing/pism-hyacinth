@@ -14,6 +14,7 @@
     <description>pism-hyacinth 基础包-所有模块都应依赖这个包</description>
 
     <modules>
+        <module>pism-hyacinth-commons-bridge</module>
         <module>pism-hyacinth-commons-module</module>
         <module>pism-hyacinth-commons-util</module>
         <module>pism-hyacinth-commons-object</module>

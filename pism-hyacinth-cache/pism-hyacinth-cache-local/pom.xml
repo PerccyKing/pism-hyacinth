@@ -5,21 +5,32 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.com.pism</groupId>
-        <artifactId>pism-hyacinth-commons</artifactId>
+        <artifactId>pism-hyacinth-cache</artifactId>
         <version>${revision}</version>
     </parent>
-    <packaging>jar</packaging>
 
-    <artifactId>pism-hyacinth-commons-module</artifactId>
+    <packaging>pom</packaging>
+    <artifactId>pism-hyacinth-cache-local</artifactId>
+
+
+    <modules>
+        <module>pism-hyacinth-cache-local-caffeine</module>
+        <module>pism-hyacinth-cache-local-guava</module>
+        <module>pism-hyacinth-cache-local-native</module>
+        <module>pism-hyacinth-cache-local-encahche</module>
+    </modules>
+
 
     <properties>
-        <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>cn.com.pism</groupId>
+            <artifactId>pism-hyacinth-cache-base</artifactId>
+        </dependency>
     </dependencies>
-
 </project>

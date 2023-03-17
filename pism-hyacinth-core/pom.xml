@@ -62,5 +62,11 @@
             <groupId>cn.com.pism</groupId>
             <artifactId>pism-hyacinth-commons-util</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.com.pism</groupId>
+            <artifactId>pism-hyacinth-cache-redis-spring</artifactId>
+            <version>0.0.1.re</version>
+        </dependency>
     </dependencies>
 </project>

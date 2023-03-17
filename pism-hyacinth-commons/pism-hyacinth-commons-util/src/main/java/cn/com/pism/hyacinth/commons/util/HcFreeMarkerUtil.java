@@ -11,8 +11,8 @@ import java.io.StringWriter;
  * @author PerccyKing
  * @since 2023/3/5 18:03
  */
-public class FreeMarkerUtil {
-    private FreeMarkerUtil() {
+public class HcFreeMarkerUtil {
+    private HcFreeMarkerUtil() {
     }
 
     public static Configuration createConfiguration() {

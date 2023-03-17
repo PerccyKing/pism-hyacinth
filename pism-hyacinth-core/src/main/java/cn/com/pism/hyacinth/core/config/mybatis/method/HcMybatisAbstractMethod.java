@@ -7,16 +7,16 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import jakarta.annotation.Resource;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
 import static cn.com.pism.hyacinth.commons.object.constant.HcSystemConstant.HC_MYBATIS_SQL_SCRIPT;
-import static cn.com.pism.hyacinth.commons.util.FreeMarkerUtil.processTemplateIntoString;
+import static cn.com.pism.hyacinth.commons.util.HcFreeMarkerUtil.processTemplateIntoString;
 import static org.springframework.boot.autoconfigure.freemarker.FreeMarkerProperties.DEFAULT_SUFFIX;
 
 /**
@@ -27,7 +27,7 @@ import static org.springframework.boot.autoconfigure.freemarker.FreeMarkerProper
  */
 public abstract class HcMybatisAbstractMethod extends AbstractMethod {
 
-    @Autowired
+    @Resource(name = "hcFreeMarkerConfiguration")
     private transient Configuration freeMarkerConfiguration;
 
     @Getter
