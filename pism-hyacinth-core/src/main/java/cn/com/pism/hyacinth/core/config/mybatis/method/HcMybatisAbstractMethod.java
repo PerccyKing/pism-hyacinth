@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import java.io.IOException;
 
@@ -27,8 +28,8 @@ import static org.springframework.boot.autoconfigure.freemarker.FreeMarkerProper
  */
 public abstract class HcMybatisAbstractMethod extends AbstractMethod {
 
-    @Resource(name = "hcFreeMarkerConfiguration")
-    private transient Configuration freeMarkerConfiguration;
+    @Resource(name = "HC_FreeMarkerConfigurer")
+    private transient FreeMarkerConfigurer freeMarkerConfigurer;
 
     @Getter
     private Class<?> mapperClass;
@@ -67,6 +68,7 @@ public abstract class HcMybatisAbstractMethod extends AbstractMethod {
         this.tableInfo = tableInfo;
         String sql;
         try {
+            Configuration freeMarkerConfiguration = freeMarkerConfigurer.getConfiguration();
             Template template = freeMarkerConfiguration.getTemplate(methodName + DEFAULT_SUFFIX);
             sql = processTemplateIntoString(template, tableInfo);
         } catch (IOException | TemplateException e) {

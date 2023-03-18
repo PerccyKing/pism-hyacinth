@@ -14,4 +14,7 @@ public class HcSystemConstant {
 
     public static final String OK = "OK";
 
+
+    public static final String HC_CACHE_DEFAULT_INSTANCE = "${spring.hyacinth.cache.default-instance}";
+
 }

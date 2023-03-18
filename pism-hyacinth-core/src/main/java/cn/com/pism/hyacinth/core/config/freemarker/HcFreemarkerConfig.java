@@ -2,13 +2,7 @@ package cn.com.pism.hyacinth.core.config.freemarker;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
-
-import java.io.IOException;
-
-import static cn.com.pism.hyacinth.commons.util.HcFreeMarkerUtil.createConfiguration;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 
 /**
@@ -18,13 +12,12 @@ import static cn.com.pism.hyacinth.commons.util.HcFreeMarkerUtil.createConfigura
 @Configuration
 public class HcFreemarkerConfig {
 
-    private final ResourceLoader resourceLoader = new DefaultResourceLoader();
-
-    @Bean("hcFreeMarkerConfiguration")
-    public freemarker.template.Configuration hcFreeMarkerConfiguration() throws IOException {
-        freemarker.template.Configuration configuration = createConfiguration();
-        Resource resource = resourceLoader.getResource("classpath:/templates");
-        configuration.setDirectoryForTemplateLoading(resource.getFile());
-        return configuration;
+    @Bean("HC_FreeMarkerConfigurer")
+    public FreeMarkerConfigurer freeMarker() {
+        FreeMarkerConfigurer config = new FreeMarkerConfigurer();
+        config.setDefaultEncoding("UTF-8");
+        config.setTemplateLoaderPath("classpath:/templates");
+        return config;
     }
+
 }

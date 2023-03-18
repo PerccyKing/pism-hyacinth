@@ -43,7 +43,7 @@
             <dependency>
                 <groupId>cn.com.pism</groupId>
                 <artifactId>pism-hyacinth-cache-redis-base</artifactId>
-                <version>${revision}</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -39,6 +39,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.com.pism</groupId>
+            <artifactId>pism-hyacinth-commons-enums</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -46,7 +51,7 @@
             <dependency>
                 <groupId>cn.com.pism</groupId>
                 <artifactId>pism-hyacinth-cache-base</artifactId>
-                <version>${revision}</version>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

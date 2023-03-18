@@ -2,6 +2,7 @@ package cn.com.pism.hyacinth.cache.redis.jedis.config;
 
 import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -41,6 +42,7 @@ public class HcCacheRedisJedisConfiguration {
 
 
     @Bean
+    @ConditionalOnMissingBean
     public JedisPool jedisPool(JedisPoolConfig jedisPoolConfig) {
         String password = redisProperties.getPassword();
         String host = redisProperties.getHost();

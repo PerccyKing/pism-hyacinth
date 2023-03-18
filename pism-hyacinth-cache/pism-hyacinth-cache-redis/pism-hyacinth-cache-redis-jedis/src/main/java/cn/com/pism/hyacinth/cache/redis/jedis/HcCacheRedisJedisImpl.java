@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static cn.com.pism.hyacinth.commons.object.constant.HcCacheTypeConstant.Redis.JEDIS;
+import static cn.com.pism.hyacinth.commons.object.constant.cache.HcCacheTypeConstant.Redis.JEDIS;
 import static cn.com.pism.hyacinth.commons.object.constant.HcSystemConstant.OK;
 
 /**

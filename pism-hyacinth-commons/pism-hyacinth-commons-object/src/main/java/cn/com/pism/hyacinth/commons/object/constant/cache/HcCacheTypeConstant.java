@@ -1,4 +1,4 @@
-package cn.com.pism.hyacinth.commons.object.constant;
+package cn.com.pism.hyacinth.commons.object.constant.cache;
 
 /**
  * @author PerccyKing
