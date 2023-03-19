@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import static cn.com.pism.hyacinth.cache.base.util.HcCacheUtil.keysValusToMap;
 import static cn.com.pism.hyacinth.commons.object.constant.cache.HcCacheTypeConstant.Redis.SPRING;
 
 /**
@@ -248,7 +249,7 @@ public class HcCacheRedisSpringImpl implements HcCache, HcCacheRedis {
      * @return 返回替换后 value 的长度
      */
     @Override
-    public Long setRange(String key, String str, int offset) {
+    public Long setRange(String key, int offset, String str) {
         redisTemplate.opsForValue().set(key, str, offset);
         return (long) Objects.requireNonNull(redisTemplate.opsForValue().get(key)).length();
     }
@@ -289,32 +290,6 @@ public class HcCacheRedisSpringImpl implements HcCache, HcCacheRedis {
             log.error(e.getMessage());
         }
         return false;
-    }
-
-    /**
-     * <p>
-     * 将k-v 转换为map
-     * </p>
-     * by PerccyKing
-     *
-     * @param keysValues : [{k-v},{k-v}]
-     * @return {@link Map}
-     * @since 2023/3/19 0:52
-     */
-    private static Map<String, String> keysValusToMap(String[] keysValues) {
-        Map<String, String> map = new HashMap<>(keysValues.length / 2);
-        int i = 1;
-        String key = null;
-        for (String keysValue : keysValues) {
-            if (i % 2 == 1) {
-                key = keysValue;
-                map.put(keysValue, null);
-            } else {
-                map.put(key, keysValue);
-            }
-            i++;
-        }
-        return map;
     }
 
     /**

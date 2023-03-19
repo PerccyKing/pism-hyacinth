@@ -191,7 +191,7 @@ public interface HcCache {
      * @return 返回替换后 value 的长度
      */
 
-    Long setRange(String key, String str, int offset);
+    Long setRange(String key, int offset, String str);
 
     /**
      * <p>

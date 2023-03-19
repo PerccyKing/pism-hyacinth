@@ -7,6 +7,11 @@ package cn.com.pism.hyacinth.commons.enums.cache;
 public enum HcCacheTypeEnums implements HcCacheTypeItf {
 
     /**
+     * 本地原生
+     */
+    LOCAL_NATIVE("HC_CACHE_LOCAL_NATIVE"),
+
+    /**
      * redis_jedis 实现
      */
     JEDIS("HC_CACHE_REDIS_JEDIS"),
