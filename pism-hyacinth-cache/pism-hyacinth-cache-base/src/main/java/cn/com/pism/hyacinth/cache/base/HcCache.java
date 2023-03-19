@@ -78,7 +78,7 @@ public interface HcCache {
      * @return true OR false
      */
 
-    Boolean exists(String key);
+    boolean exists(String key);
 
     /**
      * <p>
@@ -97,7 +97,7 @@ public interface HcCache {
      *
      * @return 总是返回 OK
      */
-    Boolean flushDb();
+    boolean flushDb();
 
     /**
      * 为给定 key 设置生存时间，当 key 过期时(生存时间为 0 )，它会被自动删除。
@@ -107,7 +107,7 @@ public interface HcCache {
      * @return 成功返回1 如果存在 和 发生异常 返回 0
      */
 
-    Long expire(String key, long exp);
+    boolean expire(String key, long exp);
 
     /**
      * 以秒为单位，返回给定 key 的剩余生存时间
@@ -129,7 +129,7 @@ public interface HcCache {
      * @return 成功返回1 如果存在 和 发生异常 返回 0
      */
 
-    Long setNx(String key, String value);
+    boolean setNx(String key, String value);
 
     /**
      * <p>
@@ -157,7 +157,7 @@ public interface HcCache {
      * @return 成功返回OK 失败和异常返回null
      */
 
-    Boolean setEx(String key, String value, long seconds);
+    boolean setEx(String key, String value, long seconds);
 
     /**
      * <p>
@@ -219,7 +219,7 @@ public interface HcCache {
      * @return 成功返回OK 失败 异常 返回 null
      */
 
-    Boolean mSet(String... keysValues);
+    boolean mSet(String... keysValues);
 
     /**
      * <p>
@@ -236,7 +236,7 @@ public interface HcCache {
      * @return 成功返回1 失败返回0
      */
 
-    Long mSetNx(String... keysValues);
+    boolean mSetNx(String... keysValues);
 
     /**
      * <p>
@@ -344,7 +344,7 @@ public interface HcCache {
      * @return 返回OK 异常返回null
      */
 
-    Boolean hmSet(String key, Map<String, String> hash);
+    boolean hmSet(String key, Map<String, String> hash);
 
     /**
      * <p>
@@ -377,7 +377,7 @@ public interface HcCache {
      * @param field param
      * @return return
      */
-    Boolean hExists(String key, String field);
+    boolean hExists(String key, String field);
 
     /**
      * <p>
@@ -466,7 +466,7 @@ public interface HcCache {
      * @param value param
      * @return 成功返回OK
      */
-    Boolean lSet(String key, Long index, String value);
+    boolean lSet(String key, Long index, String value);
 
     /**
      * <p>
@@ -490,7 +490,7 @@ public interface HcCache {
      * @param end   param
      * @return 成功返回OK
      */
-    Boolean lTrim(String key, long start, long end);
+    boolean lTrim(String key, long start, long end);
 
     /**
      * <p>
@@ -572,7 +572,7 @@ public interface HcCache {
      * @param value param
      * @return 操作成功返回 ok ，否则返回错误信息
      */
-    Boolean lSet(String key, long index, String value);
+    boolean lSet(String key, long index, String value);
 
     /**
      * <p>
@@ -637,11 +637,11 @@ public interface HcCache {
      * 以第一个set为标准
      * </p>
      *
-     * @param dstkey 差集存入的key
+     * @param dstKey 差集存入的key
      * @param keys   可以使一个string 则返回set中所有的value 也可以是string数组
      * @return return
      */
-    Long sDiffStore(String dstkey, String... keys);
+    Long sDiffStore(String dstKey, String... keys);
 
     /**
      * <p>
@@ -658,11 +658,11 @@ public interface HcCache {
      * 通过key获取指定set中的交集 并将结果存入新的set中
      * </p>
      *
-     * @param dstkey param
+     * @param dstKey param
      * @param keys   可以使一个string 也可以是一个string数组
      * @return return
      */
-    Long sInterStore(String dstkey, String... keys);
+    Long sInterStore(String dstKey, String... keys);
 
     /**
      * <p>
@@ -716,7 +716,7 @@ public interface HcCache {
      * @param member param
      * @return return
      */
-    Boolean sIsMember(String key, String member);
+    boolean sIsMember(String key, String member);
 
     /**
      * <p>
@@ -886,18 +886,6 @@ public interface HcCache {
      * @return return
      */
     List<String> zRevRangeByScore(String key, double max, double min);
-
-    /**
-     * <p>
-     * 返回指定区间内zset中value的数量
-     * </p>
-     *
-     * @param key key
-     * @param min min
-     * @param max max
-     * @return return
-     */
-    Long zCount(String key, String min, String max);
 
     /**
      * <p>

@@ -20,8 +20,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static cn.com.pism.hyacinth.commons.object.constant.cache.HcCacheTypeConstant.Redis.JEDIS;
 import static cn.com.pism.hyacinth.commons.object.constant.HcSystemConstant.OK;
+import static cn.com.pism.hyacinth.commons.object.constant.cache.HcCacheTypeConstant.Redis.JEDIS;
 
 /**
  * @author PerccyKing
@@ -117,8 +117,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      */
 
     @Override
-    public Boolean exists(String key) {
-        return jedisRun(jedisPool, jedis -> jedis.exists(key), Boolean.FALSE);
+    public boolean exists(String key) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> jedis.exists(key), Boolean.FALSE));
     }
 
     /**
@@ -142,8 +142,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      * @return 总是返回 OK
      */
     @Override
-    public Boolean flushDb() {
-        return jedisRun(jedisPool, jedis -> OK.equals(jedis.flushDB()), Boolean.FALSE);
+    public boolean flushDb() {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> OK.equals(jedis.flushDB()), Boolean.FALSE));
     }
 
     /**
@@ -155,8 +155,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      */
 
     @Override
-    public Long expire(String key, long exp) {
-        return jedisRun(jedisPool, jedis -> jedis.expire(key, exp), 0L);
+    public boolean expire(String key, long exp) {
+        return Long.valueOf(1).equals(jedisRun(jedisPool, jedis -> jedis.expire(key, exp), 0L));
     }
 
     /**
@@ -183,8 +183,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      */
 
     @Override
-    public Long setNx(String key, String value) {
-        return jedisRun(jedisPool, jedis -> jedis.setnx(key, value), 0L);
+    public boolean setNx(String key, String value) {
+        return Long.valueOf(1).equals(jedisRun(jedisPool, jedis -> jedis.setnx(key, value), 0L));
     }
 
     /**
@@ -217,8 +217,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      */
 
     @Override
-    public Boolean setEx(String key, String value, long seconds) {
-        return jedisRun(jedisPool, jedis -> OK.equals(jedis.setex(key, seconds, value)), Boolean.FALSE);
+    public boolean setEx(String key, String value, long seconds) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> OK.equals(jedis.setex(key, seconds, value)), Boolean.FALSE));
     }
 
     /**
@@ -288,8 +288,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      */
 
     @Override
-    public Boolean mSet(String... keysValues) {
-        return jedisRun(jedisPool, jedis -> OK.equals(jedis.mset(keysValues)), Boolean.FALSE);
+    public boolean mSet(String... keysValues) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> OK.equals(jedis.mset(keysValues)), Boolean.FALSE));
     }
 
     /**
@@ -308,8 +308,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      */
 
     @Override
-    public Long mSetNx(String... keysValues) {
-        return jedisRun(jedisPool, jedis -> jedis.msetnx(keysValues), 0L);
+    public boolean mSetNx(String... keysValues) {
+        return Long.valueOf(1).equals(jedisRun(jedisPool, jedis -> jedis.msetnx(keysValues), 0L));
     }
 
     /**
@@ -443,8 +443,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      */
 
     @Override
-    public Boolean hmSet(String key, Map<String, String> hash) {
-        return jedisRun(jedisPool, jedis -> OK.equals(jedis.hmset(key, hash)), Boolean.FALSE);
+    public boolean hmSet(String key, Map<String, String> hash) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> OK.equals(jedis.hmset(key, hash)), Boolean.FALSE));
     }
 
     /**
@@ -488,8 +488,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      */
 
     @Override
-    public Boolean hExists(String key, String field) {
-        return jedisRun(jedisPool, jedis -> jedis.hexists(key, field), Boolean.FALSE);
+    public boolean hExists(String key, String field) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> jedis.hexists(key, field), Boolean.FALSE));
     }
 
     /**
@@ -606,8 +606,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      * @return 成功返回OK
      */
     @Override
-    public Boolean lSet(String key, Long index, String value) {
-        return jedisRun(jedisPool, jedis -> OK.equals(jedis.lset(key, index, value)), Boolean.FALSE);
+    public boolean lSet(String key, Long index, String value) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> OK.equals(jedis.lset(key, index, value)), Boolean.FALSE));
     }
 
     /**
@@ -636,8 +636,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      * @return 成功返回OK
      */
     @Override
-    public Boolean lTrim(String key, long start, long end) {
-        return jedisRun(jedisPool, jedis -> OK.equals(jedis.ltrim(key, start, end)), Boolean.FALSE);
+    public boolean lTrim(String key, long start, long end) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> OK.equals(jedis.ltrim(key, start, end)), Boolean.FALSE));
     }
 
     /**
@@ -739,8 +739,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      * @return 操作成功返回 ok ，否则返回错误信息
      */
     @Override
-    public Boolean lSet(String key, long index, String value) {
-        return jedisRun(jedisPool, jedis -> OK.equals(jedis.lset(key, index, value)), Boolean.FALSE);
+    public boolean lSet(String key, long index, String value) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> OK.equals(jedis.lset(key, index, value)), Boolean.FALSE));
     }
 
     /**
@@ -821,13 +821,13 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      * 以第一个set为标准
      * </p>
      *
-     * @param dstkey 差集存入的key
+     * @param dstKey 差集存入的key
      * @param keys   可以使一个string 则返回set中所有的value 也可以是string数组
      * @return return
      */
     @Override
-    public Long sDiffStore(String dstkey, String... keys) {
-        return jedisRun(jedisPool, jedis -> jedis.sdiffstore(dstkey, keys), 0L);
+    public Long sDiffStore(String dstKey, String... keys) {
+        return jedisRun(jedisPool, jedis -> jedis.sdiffstore(dstKey, keys), 0L);
     }
 
     /**
@@ -848,13 +848,13 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      * 通过key获取指定set中的交集 并将结果存入新的set中
      * </p>
      *
-     * @param dstkey param
+     * @param dstKey param
      * @param keys   可以使一个string 也可以是一个string数组
      * @return return
      */
     @Override
-    public Long sInterStore(String dstkey, String... keys) {
-        return jedisRun(jedisPool, jedis -> jedis.sinterstore(dstkey, keys), 0L);
+    public Long sInterStore(String dstKey, String... keys) {
+        return jedisRun(jedisPool, jedis -> jedis.sinterstore(dstKey, keys), 0L);
     }
 
     /**
@@ -922,8 +922,8 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
      * @return return
      */
     @Override
-    public Boolean sIsMember(String key, String member) {
-        return jedisRun(jedisPool, jedis -> jedis.sismember(key, member), Boolean.FALSE);
+    public boolean sIsMember(String key, String member) {
+        return Boolean.TRUE.equals(jedisRun(jedisPool, jedis -> jedis.sismember(key, member), Boolean.FALSE));
     }
 
     /**
@@ -1134,21 +1134,6 @@ public class HcCacheRedisJedisImpl implements HcCache, HcCacheRedis, HcCacheRedi
     @Override
     public List<String> zRevRangeByScore(String key, double max, double min) {
         return jedisRun(jedisPool, jedis -> jedis.zrevrangeByScore(key, max, min), Collections.emptyList());
-    }
-
-    /**
-     * <p>
-     * 返回指定区间内zset中value的数量
-     * </p>
-     *
-     * @param key key
-     * @param min min
-     * @param max max
-     * @return return
-     */
-    @Override
-    public Long zCount(String key, String min, String max) {
-        return jedisRun(jedisPool, jedis -> jedis.zcount(key, min, max), 0L);
     }
 
     /**

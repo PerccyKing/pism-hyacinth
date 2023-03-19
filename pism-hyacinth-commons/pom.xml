@@ -40,16 +40,15 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>cn.com.pism</groupId>
-            <artifactId>pism-hyacinth-commons-module</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>cn.com.pism</groupId>
+                <artifactId>pism-hyacinth-commons-module</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>cn.com.pism</groupId>
                 <artifactId>pism-hyacinth-commons-util</artifactId>
