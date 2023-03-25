@@ -72,7 +72,13 @@
         <dependency>
             <groupId>cn.com.pism</groupId>
             <artifactId>pism-hyacinth-cache-redis-jedis</artifactId>
-            <version>0.0.1.re</version>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.com.pism</groupId>
+            <artifactId>pism-hyacinth-security-base</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>

@@ -5,21 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.com.pism</groupId>
-        <artifactId>pism-hyacinth-cache</artifactId>
+        <artifactId>pism-hyacinth-security</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <packaging>pom</packaging>
-    <artifactId>pism-hyacinth-cache-local</artifactId>
-
-
-    <modules>
-        <module>pism-hyacinth-cache-local-caffeine</module>
-        <module>pism-hyacinth-cache-local-guava</module>
-        <module>pism-hyacinth-cache-local-native</module>
-        <module>pism-hyacinth-cache-local-ehcache</module>
-    </modules>
-
+    <artifactId>pism-hyacinth-security-base</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -27,10 +17,4 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>cn.com.pism</groupId>
-            <artifactId>pism-hyacinth-cache-base</artifactId>
-        </dependency>
-    </dependencies>
 </project>

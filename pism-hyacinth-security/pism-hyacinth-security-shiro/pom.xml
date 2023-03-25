@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>cn.com.pism</groupId>
-        <artifactId>pism-hyacinth-cache-local</artifactId>
+        <artifactId>pism-hyacinth-security</artifactId>
         <version>${revision}</version>
     </parent>
 
-    <artifactId>pism-hyacinth-cache-local-encahche</artifactId>
+    <artifactId>pism-hyacinth-security-shiro</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -17,4 +17,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+  <dependencies>
+      <dependency>
+          <groupId>org.apache.shiro</groupId>
+          <artifactId>shiro-spring-boot-starter</artifactId>
+          <version>1.11.0</version>
+      </dependency>
+  </dependencies>
 </project>
