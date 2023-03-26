@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author PerccyKing
@@ -49,6 +48,6 @@ public class HcSecuritySaTokenStpInterfaceImpl implements StpInterface {
     @Override
     public List<String> getRoleList(Object loginId, String loginType) {
         List<HcSysRoleBo> roleBos = hcSecurityDataProvider.getRoleListByLoginId(loginId);
-        return roleBos.stream().map(role -> role.getId().toString()).collect(Collectors.toList());
+        return roleBos.stream().map(role -> role.getId().toString()).toList();
     }
 }

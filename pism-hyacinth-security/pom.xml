@@ -45,6 +45,11 @@
             <groupId>cn.com.pism</groupId>
             <artifactId>pism-hyacinth-commons-object</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.com.pism</groupId>
+            <artifactId>pism-hyacinth-cache-base</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

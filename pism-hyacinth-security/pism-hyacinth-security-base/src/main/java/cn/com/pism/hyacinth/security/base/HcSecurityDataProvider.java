@@ -1,5 +1,6 @@
 package cn.com.pism.hyacinth.security.base;
 
+import cn.com.pism.hyacinth.cache.base.HcCache;
 import cn.com.pism.hyacinth.commons.object.bo.HcSysRoleBo;
 import cn.com.pism.hyacinth.commons.object.bo.HcSysSourceBo;
 
@@ -39,7 +40,7 @@ public interface HcSecurityDataProvider {
 
     /**
      * <p>
-     * 获取白名单路径,不需要鉴权的路径与 {@link cn.com.pism.hyacinth.security.base.config.HcSecurityProperties#ignorePath} 不冲突
+     * 获取白名单路径,不需要鉴权的路径与 {@link cn.com.pism.hyacinth.security.base.config.HcSecurityProperties#getIgnorePath} 不冲突
      * </p>
      * by PerccyKing
      *
@@ -58,4 +59,15 @@ public interface HcSecurityDataProvider {
      * @since 2023/3/26 1:40
      */
     List<HcSysSourceBo> getAllRequireAuthSource();
+
+    /**
+     * <p>
+     * 获取一个缓存实例，用于存放token等信息
+     * </p>
+     * by PerccyKing
+     *
+     * @return {@link HcCache} 缓存实例
+     * @since 2023/3/26 12:56
+     */
+    HcCache getCache();
 }
