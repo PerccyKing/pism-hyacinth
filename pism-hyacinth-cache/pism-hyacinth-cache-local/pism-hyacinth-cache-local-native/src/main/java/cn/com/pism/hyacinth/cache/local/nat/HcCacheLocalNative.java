@@ -2,11 +2,14 @@ package cn.com.pism.hyacinth.cache.local.nat;
 
 import cn.com.pism.hyacinth.cache.base.HcCache;
 import cn.com.pism.hyacinth.cache.base.util.HcCacheUtil;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.TypeReference;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
 
 import static cn.com.pism.hyacinth.commons.object.constant.cache.HcCacheTypeConstant.Local.NATIVE;
 
@@ -170,7 +173,14 @@ public class HcCacheLocalNative implements HcCache {
     @Override
     public Long ttl(String key) {
         checkForExpiration(key);
-        return kvTsMap.get(key);
+        if (!exists(key)) {
+            return -2L;
+        }
+        Long deadTime = kvTsMap.get(key);
+        if (deadTime == null) {
+            return -1L;
+        }
+        return (deadTime - System.currentTimeMillis()) / 1000;
     }
 
     /**
@@ -373,9 +383,16 @@ public class HcCacheLocalNative implements HcCache {
     @Override
     public Long incr(String key) {
         checkKeyExpire(key);
-        String res = kvMap.get(key);
-
-        return null;
+        if (exists(key)) {
+            //key存在
+            String val = get(key);
+            Long aLong = Long.valueOf(val);
+            aLong++;
+            set(key, String.valueOf(aLong));
+        } else {
+            set(key, "1");
+        }
+        return Long.valueOf(get(key));
     }
 
     /**
@@ -429,6 +446,15 @@ public class HcCacheLocalNative implements HcCache {
      */
     @Override
     public Long strLen(String key) {
+        checkKeyExpire(key);
+        if (exists(key)) {
+            String val = get(key);
+            if (StringUtils.isBlank(val)) {
+                return 0L;
+            } else {
+                return (long) val.length();
+            }
+        }
         return null;
     }
 
@@ -444,7 +470,26 @@ public class HcCacheLocalNative implements HcCache {
      */
     @Override
     public Long hSet(String key, String field, String value) {
-        return null;
+        checkForExpiration(key);
+        Map<String, String> map;
+        if (exists(key)) {
+            String val = kvMap.get(key);
+            if (StringUtils.isNotBlank(val)) {
+                try {
+                    map = JSON.parseObject(val, new TypeReference<ConcurrentHashMap<String, String>>() {
+                    });
+                } catch (Exception e) {
+                    map = new ConcurrentHashMap<>();
+                }
+            } else {
+                map = new ConcurrentHashMap<>();
+            }
+        } else {
+            map = new ConcurrentHashMap<>();
+        }
+        map.put(field, value);
+        kvMap.put(key, JSON.toJSONString(map));
+        return 0L;
     }
 
     /**
@@ -487,6 +532,17 @@ public class HcCacheLocalNative implements HcCache {
      */
     @Override
     public String hGet(String key, String field) {
+        checkKeyExpire(key);
+        String val = kvMap.get(key);
+        if (StringUtils.isNotBlank(val)) {
+            try {
+                Map<String, String> map = JSON.parseObject(val, new TypeReference<ConcurrentHashMap<String, String>>() {
+                });
+                return map.get(field);
+            } catch (Exception e) {
+                return null;
+            }
+        }
         return null;
     }
 
@@ -581,7 +637,17 @@ public class HcCacheLocalNative implements HcCache {
      */
     @Override
     public Map<String, String> hGetAll(String key) {
-        return null;
+        checkKeyExpire(key);
+        String val = kvMap.get(key);
+        if (StringUtils.isNotBlank(val)) {
+            try {
+                return JSON.parseObject(val, new TypeReference<ConcurrentHashMap<String, String>>() {
+                });
+            } catch (Exception e) {
+                return Collections.emptyMap();
+            }
+        }
+        return Collections.emptyMap();
     }
 
     /**
@@ -1227,7 +1293,15 @@ public class HcCacheLocalNative implements HcCache {
      */
     @Override
     public Set<String> keys(String pattern) {
-        return null;
+        Set<String> keys = kvMap.keySet();
+        Set<String> res = new HashSet<>();
+        Pattern pat = Pattern.compile(pattern);
+        keys.forEach(key -> {
+            if (pat.matcher(key).matches()) {
+                res.add(get(key));
+            }
+        });
+        return res;
     }
 
     /**
