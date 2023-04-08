@@ -1,12 +1,12 @@
 package cn.com.pism.hyacinth.core.config.mybatis.method;
 
-import cn.com.pism.hyacinth.commons.enums.HcMybatisMethodItf;
+import cn.com.pism.hyacinth.commons.enums.HcMybatisMethod;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-import static cn.com.pism.hyacinth.commons.enums.HcMybatisMethodEnums.HC_BATCH_INSERT;
+import static cn.com.pism.hyacinth.commons.enums.HcMybatisMethodEnum.HC_BATCH_INSERT;
 
 /**
  * 批量新增
@@ -22,7 +22,7 @@ public class HcMybatisMethodHcBatchInsert extends HcMybatisMethodHcInsertOrUpdat
         this(HC_BATCH_INSERT);
     }
 
-    public HcMybatisMethodHcBatchInsert(HcMybatisMethodItf method) {
+    public HcMybatisMethodHcBatchInsert(HcMybatisMethod method) {
         super(method);
     }
 

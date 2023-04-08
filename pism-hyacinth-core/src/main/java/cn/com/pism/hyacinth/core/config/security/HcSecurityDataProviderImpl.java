@@ -1,11 +1,17 @@
 package cn.com.pism.hyacinth.core.config.security;
 
 import cn.com.pism.hyacinth.cache.base.HcCache;
+import cn.com.pism.hyacinth.commons.object.HcCrypto;
 import cn.com.pism.hyacinth.commons.object.bo.HcSysRoleBo;
 import cn.com.pism.hyacinth.commons.object.bo.HcSysSourceBo;
+import cn.com.pism.hyacinth.commons.object.bo.HcSysUserBo;
 import cn.com.pism.hyacinth.security.base.HcSecurityDataProvider;
 import cn.com.pism.hyacinth.security.base.config.HcSecurityProperties;
+import cn.hutool.crypto.asymmetric.RSA;
 import jakarta.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -96,4 +102,74 @@ public class HcSecurityDataProviderImpl implements HcSecurityDataProvider {
     public HcCache getCache() {
         return hcCache;
     }
+
+    /**
+     * <p>
+     * 获取用户的密码
+     * </p>
+     * by PerccyKing
+     *
+     * @param userBo : 用户业务对象
+     * @return {@link String} 加密后的密码
+     * @since 2023/3/26 21:37
+     */
+    @Override
+    public String getPasswordByUser(HcSysUserBo userBo) {
+        return null;
+    }
+
+    /**
+     * <p>
+     * 获取一个密码编码器
+     * </p>
+     * by PerccyKing
+     *
+     * @return {@link PasswordEncoder} 密码编码器
+     * @since 2023/3/26 21:52
+     */
+    @Override
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * <p>
+     * 根据用户名获取用户信息
+     * </p>
+     * by PerccyKing
+     *
+     * @param username : 用户名
+     * @return {@link HcSysUserBo} 用户信息
+     * @since 2023/4/8 17:24
+     */
+    @Override
+    public HcSysUserBo getSysUserByUsername(String username) {
+        return null;
+    }
+
+    /**
+     * <p>
+     * 获取加解密实例
+     * </p>
+     * <pre>
+     *     公私钥为空的时候，创建一个全新的对象
+     * </pre>
+     * by PerccyKing
+     *
+     * @param publicKey  公钥，可为空
+     * @param privateKey 私钥，可为空
+     * @return {@link HcCrypto}
+     * @since 2023/4/8 18:46
+     */
+    @Override
+    public HcCrypto getCrypto(String publicKey, String privateKey) {
+        RSA rsa;
+        if (StringUtils.isNoneBlank(privateKey, privateKey)) {
+            rsa = new RSA(publicKey, privateKey);
+        } else {
+            rsa = new RSA();
+        }
+        return new HcRsaHcCrypto(rsa);
+    }
+
 }

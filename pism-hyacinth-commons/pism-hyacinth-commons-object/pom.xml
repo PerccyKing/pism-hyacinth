@@ -23,6 +23,16 @@
             <groupId>cn.com.pism</groupId>
             <artifactId>pism-hyacinth-commons-module</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.com.pism</groupId>
+            <artifactId>pism-hyacinth-commons-enums</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-annotations</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

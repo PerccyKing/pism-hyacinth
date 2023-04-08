@@ -4,7 +4,7 @@ package cn.com.pism.hyacinth.commons.enums;
  * @author PerccyKing
  * @since 2023/3/5 14:59
  */
-public enum HcMybatisMethodEnums implements HcMybatisMethodItf {
+public enum HcMybatisMethodEnum implements HcMybatisMethod {
 
     /**
      * 批量插入
@@ -45,7 +45,7 @@ public enum HcMybatisMethodEnums implements HcMybatisMethodItf {
 
     private final String desc;
 
-    HcMybatisMethodEnums(String methodName, String desc) {
+    HcMybatisMethodEnum(String methodName, String desc) {
         this.methodName = methodName;
         this.desc = desc;
     }

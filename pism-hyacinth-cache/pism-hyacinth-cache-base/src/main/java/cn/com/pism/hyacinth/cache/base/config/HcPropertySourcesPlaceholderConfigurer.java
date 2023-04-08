@@ -1,6 +1,6 @@
 package cn.com.pism.hyacinth.cache.base.config;
 
-import cn.com.pism.hyacinth.commons.enums.cache.HcCacheTypeEnums;
+import cn.com.pism.hyacinth.commons.enums.cache.HcCacheTypeEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -32,7 +32,7 @@ public class HcPropertySourcesPlaceholderConfigurer extends PropertySourcesPlace
     protected void doProcessProperties(ConfigurableListableBeanFactory beanFactoryToProcess, StringValueResolver valueResolver) {
         StringValueResolver resolver = strVal -> {
             if (HC_CACHE_DEFAULT_INSTANCE.equals(strVal)) {
-                return HcCacheTypeEnums.valueOf(defaultCacheType.toUpperCase()).getName();
+                return HcCacheTypeEnum.valueOf(defaultCacheType.toUpperCase()).getName();
             }
             return valueResolver.resolveStringValue(strVal);
         };

@@ -1,8 +1,11 @@
 package cn.com.pism.hyacinth.security.base;
 
 import cn.com.pism.hyacinth.cache.base.HcCache;
+import cn.com.pism.hyacinth.commons.object.HcCrypto;
 import cn.com.pism.hyacinth.commons.object.bo.HcSysRoleBo;
 import cn.com.pism.hyacinth.commons.object.bo.HcSysSourceBo;
+import cn.com.pism.hyacinth.commons.object.bo.HcSysUserBo;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 
@@ -70,4 +73,55 @@ public interface HcSecurityDataProvider {
      * @since 2023/3/26 12:56
      */
     HcCache getCache();
+
+    /**
+     * <p>
+     * 获取用户的密码
+     * </p>
+     * by PerccyKing
+     *
+     * @param userBo : 用户业务对象
+     * @return {@link String} 加密后的密码
+     * @since 2023/3/26 21:37
+     */
+    String getPasswordByUser(HcSysUserBo userBo);
+
+    /**
+     * <p>
+     * 获取一个密码编码器
+     * </p>
+     * by PerccyKing
+     *
+     * @return {@link PasswordEncoder} 密码编码器
+     * @since 2023/3/26 21:52
+     */
+    PasswordEncoder getPasswordEncoder();
+
+    /**
+     * <p>
+     * 根据用户名获取用户信息
+     * </p>
+     * by PerccyKing
+     *
+     * @param username : 用户名
+     * @return {@link HcSysUserBo} 用户信息
+     * @since 2023/4/8 17:24
+     */
+    HcSysUserBo getSysUserByUsername(String username);
+
+    /**
+     * <p>
+     * 获取加解密实例
+     * </p>
+     * <pre>
+     *     公私钥为空的时候，创建一个全新的对象
+     * </pre>
+     * by PerccyKing
+     *
+     * @param publicKey  公钥，可为空
+     * @param privateKey 私钥，可为空
+     * @return {@link HcCrypto} 加解密实例
+     * @since 2023/4/8 18:46
+     */
+    HcCrypto getCrypto(String publicKey, String privateKey);
 }

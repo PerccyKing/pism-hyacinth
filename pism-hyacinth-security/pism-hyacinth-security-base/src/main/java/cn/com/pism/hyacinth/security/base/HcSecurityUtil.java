@@ -1,13 +1,15 @@
 package cn.com.pism.hyacinth.security.base;
 
 import cn.com.pism.hyacinth.commons.object.bo.HcSysLoginUserInfo;
-import org.springframework.stereotype.Component;
+import cn.com.pism.hyacinth.commons.object.sys.bo.HcSysLoginBo;
+import cn.com.pism.hyacinth.commons.object.sys.bo.HcSysTokenBo;
+import org.springframework.stereotype.Service;
 
 /**
  * @author PerccyKing
  * @since 2023/3/25 17:49
  */
-@Component
+@Service
 public interface HcSecurityUtil {
 
     /**
@@ -42,4 +44,27 @@ public interface HcSecurityUtil {
      * @since 2023/3/25 17:57
      */
     String getLoginUserUsername();
+
+    /**
+     * <p>
+     * 用户登录
+     * </p>
+     * by PerccyKing
+     *
+     * @param loginBo : 登录参数
+     * @return {@link HcSysTokenBo} token 信息
+     * @since 2023/3/26 21:47
+     */
+    HcSysTokenBo login(HcSysLoginBo loginBo);
+
+
+    /**
+     * <p>
+     * 退出登录
+     * </p>
+     * by PerccyKing
+     *
+     * @since 2023/4/8 18:02
+     */
+    void logout();
 }

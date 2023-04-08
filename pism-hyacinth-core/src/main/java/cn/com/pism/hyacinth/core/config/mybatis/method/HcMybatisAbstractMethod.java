@@ -1,6 +1,6 @@
 package cn.com.pism.hyacinth.core.config.mybatis.method;
 
-import cn.com.pism.hyacinth.commons.enums.HcMybatisMethodItf;
+import cn.com.pism.hyacinth.commons.enums.HcMybatisMethod;
 import cn.com.pism.hyacinth.exception.HcException;
 import com.baomidou.mybatisplus.core.injector.AbstractMethod;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
@@ -42,13 +42,13 @@ public abstract class HcMybatisAbstractMethod extends AbstractMethod {
 
     @Getter
     @Setter
-    private transient HcMybatisMethodItf method;
+    private transient HcMybatisMethod method;
 
     /**
      * @param method 方法
      * @since 3.5.0
      */
-    protected HcMybatisAbstractMethod(HcMybatisMethodItf method) {
+    protected HcMybatisAbstractMethod(HcMybatisMethod method) {
         super(method.getMethodName());
         this.method = method;
     }

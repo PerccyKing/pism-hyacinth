@@ -1,10 +1,10 @@
 package cn.com.pism.hyacinth.core.config.mybatis.method;
 
-import cn.com.pism.hyacinth.commons.enums.HcMybatisMethodItf;
+import cn.com.pism.hyacinth.commons.enums.HcMybatisMethod;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import static cn.com.pism.hyacinth.commons.enums.HcMybatisMethodEnums.HC_INSERT_SELECTIVE;
+import static cn.com.pism.hyacinth.commons.enums.HcMybatisMethodEnum.HC_INSERT_SELECTIVE;
 
 /**
  * 批量新增
@@ -20,7 +20,7 @@ public class HcMybatisMethodHcInsertSelective extends HcMybatisMethodHcInsertOrU
         this(HC_INSERT_SELECTIVE);
     }
 
-    public HcMybatisMethodHcInsertSelective(HcMybatisMethodItf method) {
+    public HcMybatisMethodHcInsertSelective(HcMybatisMethod method) {
         super(method);
     }
 

@@ -4,7 +4,7 @@ package cn.com.pism.hyacinth.commons.enums;
  * @author PerccyKing
  * @since 2023/3/5 14:57
  */
-public interface HcMybatisMethodItf {
+public interface HcMybatisMethod {
     /**
      * <p>
      * 获取方法名称

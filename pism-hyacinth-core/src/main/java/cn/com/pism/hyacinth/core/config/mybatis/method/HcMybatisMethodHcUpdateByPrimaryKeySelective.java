@@ -1,12 +1,12 @@
 package cn.com.pism.hyacinth.core.config.mybatis.method;
 
-import cn.com.pism.hyacinth.commons.enums.HcMybatisMethodItf;
+import cn.com.pism.hyacinth.commons.enums.HcMybatisMethod;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 import org.springframework.stereotype.Component;
 
-import static cn.com.pism.hyacinth.commons.enums.HcMybatisMethodEnums.HC_UPDATE_BY_PRIMARY_KEY_SELECTIVE;
+import static cn.com.pism.hyacinth.commons.enums.HcMybatisMethodEnum.HC_UPDATE_BY_PRIMARY_KEY_SELECTIVE;
 
 /**
  * 批量新增
@@ -22,7 +22,7 @@ public class HcMybatisMethodHcUpdateByPrimaryKeySelective extends HcMybatisAbstr
         this(HC_UPDATE_BY_PRIMARY_KEY_SELECTIVE);
     }
 
-    public HcMybatisMethodHcUpdateByPrimaryKeySelective(HcMybatisMethodItf method) {
+    public HcMybatisMethodHcUpdateByPrimaryKeySelective(HcMybatisMethod method) {
         super(method);
     }
 

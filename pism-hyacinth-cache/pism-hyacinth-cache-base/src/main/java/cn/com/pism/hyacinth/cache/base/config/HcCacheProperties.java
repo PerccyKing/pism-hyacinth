@@ -1,6 +1,6 @@
 package cn.com.pism.hyacinth.cache.base.config;
 
-import cn.com.pism.hyacinth.commons.enums.cache.HcCacheTypeEnums;
+import cn.com.pism.hyacinth.commons.enums.cache.HcCacheTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -19,7 +19,7 @@ public class HcCacheProperties {
      */
     @Getter
     @Setter
-    private HcCacheTypeEnums defaultCacheType;
+    private HcCacheTypeEnum defaultCacheType;
 
     /**
      * <p>

@@ -80,5 +80,11 @@
             <artifactId>pism-hyacinth-security-base</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-crypto</artifactId>
+            <version>5.8.10</version>
+        </dependency>
     </dependencies>
 </project>

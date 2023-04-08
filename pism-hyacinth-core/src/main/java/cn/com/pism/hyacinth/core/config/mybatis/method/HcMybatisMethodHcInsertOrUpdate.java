@@ -1,6 +1,6 @@
 package cn.com.pism.hyacinth.core.config.mybatis.method;
 
-import cn.com.pism.hyacinth.commons.enums.HcMybatisMethodItf;
+import cn.com.pism.hyacinth.commons.enums.HcMybatisMethod;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.metadata.TableInfo;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
@@ -12,7 +12,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlSource;
 import org.springframework.stereotype.Component;
 
-import static cn.com.pism.hyacinth.commons.enums.HcMybatisMethodEnums.HC_INSERT_OR_UPDATE;
+import static cn.com.pism.hyacinth.commons.enums.HcMybatisMethodEnum.HC_INSERT_OR_UPDATE;
 
 /**
  * 新增或更新
@@ -26,7 +26,7 @@ public class HcMybatisMethodHcInsertOrUpdate extends HcMybatisAbstractMethod {
         this(HC_INSERT_OR_UPDATE);
     }
 
-    public HcMybatisMethodHcInsertOrUpdate(HcMybatisMethodItf method) {
+    public HcMybatisMethodHcInsertOrUpdate(HcMybatisMethod method) {
         super(method);
     }
 

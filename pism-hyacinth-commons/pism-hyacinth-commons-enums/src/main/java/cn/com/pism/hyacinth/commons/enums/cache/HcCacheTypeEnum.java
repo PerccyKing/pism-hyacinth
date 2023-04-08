@@ -4,7 +4,7 @@ package cn.com.pism.hyacinth.commons.enums.cache;
  * @author PerccyKing
  * @since 2023/3/18 17:17
  */
-public enum HcCacheTypeEnums implements HcCacheTypeItf {
+public enum HcCacheTypeEnum implements HcCacheType {
 
     /**
      * 本地原生
@@ -26,7 +26,7 @@ public enum HcCacheTypeEnums implements HcCacheTypeItf {
 
     private final String name;
 
-    HcCacheTypeEnums(String name) {
+    HcCacheTypeEnum(String name) {
         this.name = name;
     }
 
