@@ -3,13 +3,11 @@ package cn.com.pism.hyacinth.security.base;
 import cn.com.pism.hyacinth.commons.object.bo.HcSysLoginUserInfo;
 import cn.com.pism.hyacinth.commons.object.sys.bo.HcSysLoginBo;
 import cn.com.pism.hyacinth.commons.object.sys.bo.HcSysTokenBo;
-import org.springframework.stereotype.Service;
 
 /**
  * @author PerccyKing
  * @since 2023/3/25 17:49
  */
-@Service
 public interface HcSecurityUtil {
 
     /**

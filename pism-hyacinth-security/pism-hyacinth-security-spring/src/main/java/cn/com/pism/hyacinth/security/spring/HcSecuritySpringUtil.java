@@ -1,28 +1,17 @@
-package cn.com.pism.hyacinth.security.satoken;
+package cn.com.pism.hyacinth.security.spring;
 
 import cn.com.pism.hyacinth.commons.object.bo.HcSysLoginUserInfo;
-import cn.com.pism.hyacinth.commons.object.bo.HcSysUserBo;
 import cn.com.pism.hyacinth.commons.object.sys.bo.HcSysLoginBo;
 import cn.com.pism.hyacinth.commons.object.sys.bo.HcSysTokenBo;
-import cn.com.pism.hyacinth.security.base.HcSecurityDataProvider;
 import cn.com.pism.hyacinth.security.base.HcSecurityUtil;
-import cn.dev33.satoken.stp.StpUtil;
-import com.alibaba.fastjson2.JSON;
-import jakarta.annotation.Resource;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
  * @author PerccyKing
- * @since 2023/3/26 23:24
+ * @since 2023/4/8 21:52
  */
 @Service
-public class HcSecuritySaTokenUtil implements HcSecurityUtil {
-
-    @Resource
-    private HcSecurityDataProvider hcSecurityDataProvider;
-
-    private static final String LOGIN_USER_INFO_KEY = "hc:security:login:user:info";
+public class HcSecuritySpringUtil implements HcSecurityUtil {
 
     /**
      * <p>
@@ -35,8 +24,7 @@ public class HcSecuritySaTokenUtil implements HcSecurityUtil {
      */
     @Override
     public HcSysLoginUserInfo getLoginUserInfo() {
-        Object loginUserInfo = StpUtil.getSession().get(LOGIN_USER_INFO_KEY);
-        return JSON.parseObject(loginUserInfo.toString(), HcSysLoginUserInfo.class);
+        return null;
     }
 
     /**
@@ -50,7 +38,7 @@ public class HcSecuritySaTokenUtil implements HcSecurityUtil {
      */
     @Override
     public Long getLoginUserId() {
-        return StpUtil.getLoginIdAsLong();
+        return null;
     }
 
     /**
@@ -64,7 +52,8 @@ public class HcSecuritySaTokenUtil implements HcSecurityUtil {
      */
     @Override
     public String getLoginUserUsername() {
-        return getLoginUserInfo().getUsername();
+
+        return null;
     }
 
     /**
@@ -79,14 +68,7 @@ public class HcSecuritySaTokenUtil implements HcSecurityUtil {
      */
     @Override
     public HcSysTokenBo login(HcSysLoginBo loginBo) {
-        PasswordEncoder passwordEncoder = hcSecurityDataProvider.getPasswordEncoder();
-        HcSysUserBo sysUserBo = hcSecurityDataProvider.getSysUserByUsername(loginBo.getUsername());
-        //获取密码
-        String password = hcSecurityDataProvider.getPasswordByUser(HcSysUserBo.builder().username(loginBo.getUsername()).build());
-        //检查密码是否匹配
-        if (passwordEncoder.matches(loginBo.getPassword(), password)) {
-            StpUtil.login(sysUserBo.getId());
-        }
+
         return null;
     }
 
@@ -100,7 +82,6 @@ public class HcSecuritySaTokenUtil implements HcSecurityUtil {
      */
     @Override
     public void logout() {
-        StpUtil.logout();
-    }
 
+    }
 }
