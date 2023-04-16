@@ -1,6 +1,5 @@
 package cn.com.pism.hyacinth.security.spring.config;
 
-import cn.com.pism.hyacinth.commons.object.bo.HcSysRoleBo;
 import cn.com.pism.hyacinth.commons.object.bo.HcSysSourceBo;
 import cn.com.pism.hyacinth.security.base.HcSecurityDataProvider;
 import cn.com.pism.hyacinth.security.base.config.HcSecurityProperties;
@@ -9,13 +8,16 @@ import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.authorization.AuthorizationDecision;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -23,6 +25,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -58,10 +61,16 @@ public class HcSecuritySpringConfig {
     }
 
     @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+
+    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         List<String> ignorePath = hcSecurityProperties.getIgnorePath();
 
         http
+                .csrf().disable()
                 //不使用session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
@@ -99,7 +108,7 @@ public class HcSecuritySpringConfig {
 
     /**
      * <p>
-     * 校验登录用是否持有权限
+     * 校验登录用户是否持有权限
      * </p>
      * by PerccyKing
      *
@@ -109,16 +118,10 @@ public class HcSecuritySpringConfig {
      * @since 2023/4/10 0:17
      */
     private boolean userHasSource(Authentication authentication, HcSysSourceBo hcSysSourceBo) {
-        //获取当前用户拥有的角色
-        List<HcSysRoleBo> sysRoleBos = hcSecurityDataProvider.getRoleListByLoginId(authentication.getPrincipal());
-        for (HcSysRoleBo sysRoleBo : sysRoleBos) {
-            //使用角色获取资源列表
-            List<HcSysSourceBo> sourceBos = hcSecurityDataProvider.getSourceListByRoleId(String.valueOf(sysRoleBo.getId()));
-            for (HcSysSourceBo sourceBo : sourceBos) {
-                //校验用户持有权限和系统权限
-                if (sourceBo.getCode().equals(hcSysSourceBo.getCode())) {
-                    return true;
-                }
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for (GrantedAuthority authority : authorities) {
+            if (authority.getAuthority().equals(hcSysSourceBo.getCode())) {
+                return true;
             }
         }
         return false;

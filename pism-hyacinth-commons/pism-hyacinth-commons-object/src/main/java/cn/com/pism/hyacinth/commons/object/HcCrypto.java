@@ -21,6 +21,28 @@ public abstract class HcCrypto {
 
     /**
      * <p>
+     * 获取公钥
+     * </p>
+     * by PerccyKing
+     *
+     * @return {@link String} 公钥
+     * @since 2023/4/15 13:31
+     */
+    public abstract String getPublicKey();
+
+    /**
+     * <p>
+     * 获取私钥
+     * </p>
+     * by PerccyKing
+     *
+     * @return {@link String} 私钥
+     * @since 2023/4/15 13:32
+     */
+    public abstract String getPrivateKey();
+
+    /**
+     * <p>
      * 加密
      * </p>
      * by PerccyKing

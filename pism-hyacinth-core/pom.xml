@@ -86,5 +86,10 @@
             <artifactId>hutool-crypto</artifactId>
             <version>5.8.10</version>
         </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-jwt</artifactId>
+            <version>5.8.9</version>
+        </dependency>
     </dependencies>
 </project>

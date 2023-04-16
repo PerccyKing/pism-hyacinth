@@ -3,17 +3,48 @@ package cn.com.pism.hyacinth.core.config.security;
 import cn.com.pism.hyacinth.commons.object.HcCrypto;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author PerccyKing
  * @since 2023/4/8 19:22
  */
+@EqualsAndHashCode(callSuper = true)
 public class HcRsaHcCrypto extends HcCrypto {
 
     private final RSA rsa;
 
     public HcRsaHcCrypto(RSA rsa) {
         this.rsa = rsa;
+    }
+
+
+    /**
+     * <p>
+     * 获取公钥
+     * </p>
+     * by PerccyKing
+     *
+     * @return {@link String} 公钥
+     * @since 2023/4/15 13:31
+     */
+    @Override
+    public String getPublicKey() {
+        return rsa.getPublicKeyBase64();
+    }
+
+    /**
+     * <p>
+     * 获取私钥
+     * </p>
+     * by PerccyKing
+     *
+     * @return {@link String} 私钥
+     * @since 2023/4/15 13:32
+     */
+    @Override
+    public String getPrivateKey() {
+        return rsa.getPrivateKeyBase64();
     }
 
     /**
@@ -43,6 +74,6 @@ public class HcRsaHcCrypto extends HcCrypto {
      */
     @Override
     public String decrypt(String encryptStr) {
-        return rsa.decryptStr(encryptStr,KeyType.PrivateKey);
+        return rsa.decryptStr(encryptStr, KeyType.PrivateKey);
     }
 }

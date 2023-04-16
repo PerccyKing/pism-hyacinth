@@ -115,7 +115,7 @@ public class HcSecurityDataProviderImpl implements HcSecurityDataProvider {
      */
     @Override
     public String getPasswordByUser(HcSysUserBo userBo) {
-        return null;
+        return getPasswordEncoder().encode("zhangsan");
     }
 
     /**
@@ -144,7 +144,10 @@ public class HcSecurityDataProviderImpl implements HcSecurityDataProvider {
      */
     @Override
     public HcSysUserBo getSysUserByUsername(String username) {
-        return null;
+        HcSysUserBo userBo = new HcSysUserBo();
+        userBo.setUsername("zhangsan");
+        userBo.setId(1L);
+        return userBo;
     }
 
     /**
@@ -164,8 +167,8 @@ public class HcSecurityDataProviderImpl implements HcSecurityDataProvider {
     @Override
     public HcCrypto getCrypto(String publicKey, String privateKey) {
         RSA rsa;
-        if (StringUtils.isNoneBlank(privateKey, privateKey)) {
-            rsa = new RSA(publicKey, privateKey);
+        if (StringUtils.isNoneBlank(publicKey, privateKey)) {
+            rsa = new RSA(privateKey, publicKey);
         } else {
             rsa = new RSA();
         }

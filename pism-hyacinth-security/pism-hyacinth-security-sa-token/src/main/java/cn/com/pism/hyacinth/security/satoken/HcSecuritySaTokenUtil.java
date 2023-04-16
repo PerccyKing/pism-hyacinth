@@ -6,11 +6,14 @@ import cn.com.pism.hyacinth.commons.object.sys.bo.HcSysLoginBo;
 import cn.com.pism.hyacinth.commons.object.sys.bo.HcSysTokenBo;
 import cn.com.pism.hyacinth.security.base.HcSecurityDataProvider;
 import cn.com.pism.hyacinth.security.base.HcSecurityUtil;
+import cn.dev33.satoken.stp.SaTokenInfo;
 import cn.dev33.satoken.stp.StpUtil;
 import com.alibaba.fastjson2.JSON;
 import jakarta.annotation.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import static cn.com.pism.hyacinth.commons.object.constant.HcCacheKeyConstant.LOGIN_USER_INFO_KEY;
 
 /**
  * @author PerccyKing
@@ -21,8 +24,6 @@ public class HcSecuritySaTokenUtil implements HcSecurityUtil {
 
     @Resource
     private HcSecurityDataProvider hcSecurityDataProvider;
-
-    private static final String LOGIN_USER_INFO_KEY = "hc:security:login:user:info";
 
     /**
      * <p>
@@ -35,7 +36,7 @@ public class HcSecuritySaTokenUtil implements HcSecurityUtil {
      */
     @Override
     public HcSysLoginUserInfo getLoginUserInfo() {
-        Object loginUserInfo = StpUtil.getSession().get(LOGIN_USER_INFO_KEY);
+        Object loginUserInfo = StpUtil.getSession().get(String.format(LOGIN_USER_INFO_KEY, getLoginUserId()));
         return JSON.parseObject(loginUserInfo.toString(), HcSysLoginUserInfo.class);
     }
 
@@ -87,7 +88,17 @@ public class HcSecuritySaTokenUtil implements HcSecurityUtil {
         if (passwordEncoder.matches(loginBo.getPassword(), password)) {
             StpUtil.login(sysUserBo.getId());
         }
-        return null;
+        SaTokenInfo tokenInfo = StpUtil.getTokenInfo();
+        HcSysTokenBo hcSysTokenBo = new HcSysTokenBo();
+        hcSysTokenBo.setToken(tokenInfo.getTokenValue());
+        hcSysTokenBo.setName(tokenInfo.getTokenName());
+        hcSysTokenBo.setDuration(String.valueOf(tokenInfo.getTokenTimeout()));
+        //登录成功，添加缓存
+        HcSysLoginUserInfo loginUserInfo = new HcSysLoginUserInfo();
+        loginUserInfo.setId(sysUserBo.getId());
+        loginUserInfo.setUsername(sysUserBo.getUsername());
+        StpUtil.getSession().set(String.format(LOGIN_USER_INFO_KEY, sysUserBo.getId()), JSON.toJSONString(loginUserInfo));
+        return hcSysTokenBo;
     }
 
     /**

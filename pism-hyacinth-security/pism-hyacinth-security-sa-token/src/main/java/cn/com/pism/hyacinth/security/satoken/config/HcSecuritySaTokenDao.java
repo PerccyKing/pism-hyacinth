@@ -212,6 +212,6 @@ public class HcSecuritySaTokenDao implements SaTokenDao {
         if (obj == null) {
             return null;
         }
-        return JSON.parseObject(obj.toString(), HcSecuritySaSessionCustomized.class);
+        return JSON.parseObject(JSON.toJSONString(obj), HcSecuritySaSessionCustomized.class);
     }
 }

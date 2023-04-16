@@ -25,4 +25,14 @@ public class HcSecurityProperties {
      * 是否启用安全校验，关闭不会对请求进行鉴权
      */
     private boolean enabled = true;
+
+    /**
+     * token名称
+     */
+    private String tokenName = "hc-token";
+
+    /**
+     * token有效期 默认30天，单位秒
+     */
+    private Long timeout = 30 * 24 * 60 * 60L;
 }

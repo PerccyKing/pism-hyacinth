@@ -88,6 +88,22 @@ public class HcSecurityServiceImpl implements HcSecurityService {
 
     /**
      * <p>
+     * 获取公钥加密数据
+     * </p>
+     * by PerccyKing
+     *
+     * @param uniqueId : 唯一id
+     * @param data     : 代加密数据
+     * @return {@link String} 加密后的数据
+     * @since 2023/4/15 19:14
+     */
+    @Override
+    public String publicKeyEncrypt(String uniqueId, String data) {
+        return getCrypto(uniqueId).encrypt(data);
+    }
+
+    /**
+     * <p>
      * 获取加密解密工具
      * </p>
      * by PerccyKing
@@ -97,14 +113,15 @@ public class HcSecurityServiceImpl implements HcSecurityService {
      * @since 2023/4/8 21:27
      */
     public HcCrypto getCrypto(String uniqueId) {
-        Map<String, String> keyPairMap = hcCache.hGetAll(KEY_PAIR_KEY + uniqueId);
+        String key = KEY_PAIR_KEY + uniqueId;
+        Map<String, String> keyPairMap = hcCache.hGetAll(key);
         HcCrypto crypto;
         if (CollectionUtils.isEmpty(keyPairMap)) {
             crypto = hcSecurityDataProvider.getCrypto(null, null);
             //添加缓存
-            hcCache.hSet(KEY_PAIR_KEY, PUBLIC_KEY, crypto.getPublicKey());
-            hcCache.hSet(KEY_PAIR_KEY, PUBLIC_KEY, crypto.getPrivateKey());
-            hcCache.expire(KEY_PAIR_KEY, 30);
+            hcCache.hSet(key, PUBLIC_KEY, crypto.getPublicKey());
+            hcCache.hSet(key, PRIVATE_KEY, crypto.getPrivateKey());
+            hcCache.expire(key, 300);
         } else {
             crypto = hcSecurityDataProvider.getCrypto(keyPairMap.get(PUBLIC_KEY), keyPairMap.get(PRIVATE_KEY));
         }

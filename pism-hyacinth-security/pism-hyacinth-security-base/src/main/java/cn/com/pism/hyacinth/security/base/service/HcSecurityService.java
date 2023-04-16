@@ -43,4 +43,16 @@ public interface HcSecurityService {
      */
     String getPublicKey(String uniqueId);
 
+    /**
+     * <p>
+     * 获取公钥加密数据
+     * </p>
+     * by PerccyKing
+     *
+     * @param uniqueId : 唯一id
+     * @param data     : 代加密数据
+     * @return {@link String} 加密后的数据
+     * @since 2023/4/15 19:14
+     */
+    String publicKeyEncrypt(String uniqueId, String data);
 }

@@ -29,16 +29,15 @@ public class HcSecuritySpringUserDetailsServiceImpl implements UserDetailsServic
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         HcSysUserBo userBo = hcSecurityDataProvider.getSysUserByUsername(username);
-        String password = hcSecurityDataProvider.getPasswordByUser(userBo);
         if (userBo == null) {
             throw new HcException("用户名或密码错误");
         }
+        String password = hcSecurityDataProvider.getPasswordByUser(userBo);
         List<HcSysRoleBo> roleBoList = hcSecurityDataProvider.getRoleListByLoginId(userBo.getId());
         List<HcSysSourceBo> hcSysSourceBos = new ArrayList<>();
         roleBoList.forEach(role -> hcSysSourceBos.addAll(hcSecurityDataProvider.getSourceListByRoleId(String.valueOf(role.getId()))));
         List<SimpleGrantedAuthority> authorities = hcSysSourceBos.stream()
                 .map(bo -> new SimpleGrantedAuthority(bo.getCode())).toList();
-        return new User(username, password, authorities);
-
+        return new User(String.valueOf(userBo.getId()), password, authorities);
     }
 }

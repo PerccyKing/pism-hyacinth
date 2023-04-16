@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RequestMapping("/security")
 @Api("认证授权")
+@RestController
 public class HcSecurityController {
 
     @Resource
@@ -68,6 +69,23 @@ public class HcSecurityController {
     @ApiOperation("获取公钥")
     public HcResult<String> getPublicKey(@ApiParam("唯一id") @PathVariable String uniqueId) {
         return HcResult.success(hcSecurityService.getPublicKey(uniqueId));
+    }
+
+    /**
+     * <p>
+     * 获取公钥加密数据,生产环境，前端不允许调用当前接口
+     * </p>
+     * by PerccyKing
+     *
+     * @param uniqueId : 唯一id 用于识别密钥对
+     * @return {@link HcResult<String>} 公钥加密后的数据
+     * @since 2023/4/15 19:08
+     */
+    @GetMapping("/publicKeyEncrypt/{uniqueId}")
+    @ApiOperation("获取公钥加密数据")
+    public HcResult<String> publicKeyEncrypt(@ApiParam("唯一id") @PathVariable String uniqueId,
+                                             @ApiParam("代加密数据") @RequestParam("data") String data) {
+        return HcResult.success(hcSecurityService.publicKeyEncrypt(uniqueId, data));
     }
 
 }
