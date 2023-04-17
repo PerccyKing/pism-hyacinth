@@ -27,12 +27,12 @@ public class HcCacheKeyConstant {
     public static final String PRIVATE_KEY = "private";
 
     /**
-     * 登录用户信息缓存key
+     * 登录用户信息缓存key hc:security:login:user:info:{loginId}
      */
     public static final String LOGIN_USER_INFO_KEY = "hc:security:login:user:info:%s";
 
     /**
-     * 登录的token
+     * 登录的token hc:security:login:{tokenName}:{token}
      */
     public static final String LOGIN_TOKEN_KEY = "hc:security:login:%s:%s";
 }

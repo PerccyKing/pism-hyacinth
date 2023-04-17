@@ -112,6 +112,7 @@ public class HcSecuritySpringUtil implements HcSecurityUtil {
             //缓存token
             hcCache.setEx(String.format(LOGIN_TOKEN_KEY, hcSecurityProperties.getTokenName(), hcSysTokenBo.getToken()),
                     String.valueOf(loginUserInfo.getId()), hcSecurityProperties.getTimeout());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             return hcSysTokenBo;
         }
         throw new HcException("用户名或密码错误");
@@ -128,5 +129,6 @@ public class HcSecuritySpringUtil implements HcSecurityUtil {
     @Override
     public void logout() {
         //删除登录缓存,让token过期
+        SecurityContextHolder.clearContext();
     }
 }
